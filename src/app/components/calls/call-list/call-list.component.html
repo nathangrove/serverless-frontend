@@ -1,0 +1,62 @@
+<md-card-title>My API Calls</md-card-title>
+
+
+
+<md-card-content>
+
+ 
+  <div class="content mat-elevation-z8">
+
+    <h3 *ngIf="!callService.data.length">No calls created yet.</h3>
+
+    <md-table #table [dataSource]="callService" *ngIf="callService.data.length">
+
+      <ng-container cdkColumnDef="name">
+        <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.name }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="active">
+        <md-header-cell *cdkHeaderCellDef> Active </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.active }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="runs">
+        <md-header-cell *cdkHeaderCellDef> Runs </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.runs }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="crashes">
+        <md-header-cell *cdkHeaderCellDef> Crashes </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.crashes }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="last">
+        <md-header-cell *cdkHeaderCellDef>Last Run</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.last.getTime() ? row.last.toLocaleString() : 'Never' }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="created">
+        <md-header-cell *cdkHeaderCellDef>Created</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.created.toLocaleString() }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="actions">
+        <md-header-cell *cdkHeaderCellDef></md-header-cell>
+        <md-cell *cdkCellDef="let row">
+          <a [routerLink]="['/calls',row._id]"><md-icon>edit</md-icon></a>
+          <a (click)="callService.delete(row._id)"><md-icon>delete</md-icon></a>
+        </md-cell>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="['name','active','runs','crashes','last','created','actions']"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: ['name','active','runs','crashes','last','created','actions'];"></md-row>
+    </md-table>
+  </div>
+
+</md-card-content>
+
+<md-card-actions>
+  <button class='pull-right' md-fab md-raised-button [routerLink]="['/calls/new']"><md-icon>add</md-icon></button>
+  <div class="clearfix"></div>
+</md-card-actions>

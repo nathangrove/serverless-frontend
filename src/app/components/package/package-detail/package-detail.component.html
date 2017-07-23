@@ -1,0 +1,24 @@
+<div *ngIf="pkg">
+  
+  <md-card-title *ngIf="pkg._id == 'new'">Install new NPM package</md-card-title>
+  <md-card-title *ngIf="pkg._id != 'new'">{{ 'NPM Package | ' + pkg.name }}</md-card-title>
+
+  <md-card-content>
+
+    <md-input-container class="form-control">
+      <input mdInput placeholder="Name" value="" [(ngModel)]="pkg.name">
+    </md-input-container>
+
+    <md-input-container class="form-control">
+      <input mdInput placeholder="Version" value="" [(ngModel)]="pkg.version">
+    </md-input-container>
+
+
+    <md-card-actions>
+      <button md-raised-button color="primary" class="pull-right" (click)="save()"><md-icon>done</md-icon> SAVE</button>
+    </md-card-actions>
+
+
+  </md-card-content>
+
+</div>

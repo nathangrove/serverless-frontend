@@ -1,0 +1,49 @@
+<md-card-title>Installed NPM Packages</md-card-title>
+
+<md-card-content>
+
+  <div class="content mat-elevation-z8">
+
+    <h3 *ngIf="!packageService.data.length">No packages installed.</h3>
+
+    <md-table #table [dataSource]="packageService" *ngIf="packageService.data.length">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Progress Column -->
+      <ng-container cdkColumnDef="name">
+        <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.name }}</md-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container cdkColumnDef="version">
+        <md-header-cell *cdkHeaderCellDef> Version </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.version }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="created">
+        <md-header-cell *cdkHeaderCellDef>Created</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.created.toLocaleString() }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="actions">
+        <md-header-cell *cdkHeaderCellDef></md-header-cell>
+        <md-cell *cdkCellDef="let row">
+          <a [routerLink]="['/admin/packages',row._id]"><md-icon>edit</md-icon></a>
+          <a (click)="packageService.delete(row._id)"><md-icon>delete</md-icon></a>
+        </md-cell>>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="['name','version','created','actions']"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: ['name','version','created','actions'];"></md-row>
+    </md-table>
+  </div>
+
+</md-card-content>
+
+<md-card-actions>
+  <button class='pull-right' md-fab md-raised-button [routerLink]="['/admin/packages/new']"><md-icon>add</md-icon></button>
+  <div class="clearfix"></div>
+</md-card-actions>

@@ -1,0 +1,27 @@
+<div *ngIf="user">
+  
+  <md-card-title *ngIf="user._id == 'new'">New System User</md-card-title>
+  <md-card-title *ngIf="user._id != 'new'">{{ 'System User | ' + user.username }}</md-card-title>
+
+  <md-card-content>
+
+    <md-input-container class="form-control">
+      <input mdInput placeholder="Username" value="" [(ngModel)]="user.username">
+    </md-input-container>
+
+    <md-input-container class="form-control">
+      <input mdInput placeholder="Password" value="" type='password' [(ngModel)]="user.password">
+    </md-input-container>
+
+
+    <md-checkbox align="left" [(ngModel)]="user.active" class="">Active</md-checkbox><br/>
+    <md-checkbox align="left" [(ngModel)]="user.admin" class="">Admin</md-checkbox>
+
+    <md-card-actions>
+      <button md-raised-button color="primary" class="pull-right" (click)="save()"><md-icon>done</md-icon> SAVE</button>
+    </md-card-actions>
+
+
+  </md-card-content>
+
+</div>

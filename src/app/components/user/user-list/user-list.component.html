@@ -1,0 +1,49 @@
+<md-card-title>System Users</md-card-title>
+
+<md-card-content>
+
+  <div class="content mat-elevation-z8">
+
+    <h3 *ngIf="!userService.data.length">There are no users in the system. Which is odd, you shouldn't see this.</h3>
+
+    <md-table #table [dataSource]="userService" *ngIf="userService.data.length">
+
+      <ng-container cdkColumnDef="username">
+        <md-header-cell *cdkHeaderCellDef> Username </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.username }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="active">
+        <md-header-cell *cdkHeaderCellDef> Active </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.active }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="admin">
+        <md-header-cell *cdkHeaderCellDef> Admin </md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.admin }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="create">
+        <md-header-cell *cdkHeaderCellDef>Created</md-header-cell>
+        <md-cell *cdkCellDef="let row">{{ row.created.toLocaleString() }}</md-cell>
+      </ng-container>
+
+      <ng-container cdkColumnDef="actions">
+        <md-header-cell *cdkHeaderCellDef></md-header-cell>
+        <md-cell *cdkCellDef="let row">
+          <a [routerLink]="['/admin/users',row._id]"><md-icon>edit</md-icon></a>
+          <a (click)="userService.delete(row._id)"><md-icon>delete</md-icon></a>
+        </md-cell>>
+      </ng-container>
+
+      <md-header-row *cdkHeaderRowDef="['username','active','admin','create','actions']"></md-header-row>
+      <md-row *cdkRowDef="let row; columns: ['username','active','admin','create','actions'];"></md-row>
+    </md-table>
+  </div>
+
+</md-card-content>
+
+  <md-card-actions>
+    <button class='pull-right' md-fab md-raised-button [routerLink]="['/admin/users/new']"><md-icon>add</md-icon></button>
+    <div class="clearfix"></div>
+  </md-card-actions>

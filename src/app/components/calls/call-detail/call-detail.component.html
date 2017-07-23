@@ -1,0 +1,28 @@
+<div *ngIf="call">
+  
+  <md-card-title *ngIf="call._id == 'new'">New System Call</md-card-title>
+  <md-card-title *ngIf="call._id != 'new'">{{ 'System Call | ' + call.name }}</md-card-title>
+
+  <md-card-content>
+
+    <md-input-container class="name-control">
+      <input mdInput placeholder="Name" value="" [(ngModel)]="call.name">
+    </md-input-container>
+
+    <md-checkbox align="right" [(ngModel)]="call.active" class="pull-right">Active</md-checkbox>
+
+    <codemirror [(ngModel)]="code" *ngIf="call._id == 'new'" [config]="codemirrorconfig"></codemirror>
+
+    <md-input-container class="form-control" *ngIf="call.encryptedCode">
+      <p>Your encrypted code. Save this code. It <b>CANNOT</b> be retreived, only regenerated.</p>
+      <textarea mdInput name="Save this code. It cannot be retreived." id="" cols="30" rows="10">{{ call.encryptedCode }}</textarea>
+    </md-input-container> 
+
+    <md-card-actions>
+      <button md-raised-button color="primary" class="pull-right" (click)="save()"><md-icon>done</md-icon> SAVE</button>
+    </md-card-actions>
+
+
+  </md-card-content>
+
+</div>

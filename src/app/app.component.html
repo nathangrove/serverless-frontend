@@ -1,0 +1,36 @@
+<!--
+<md-card>
+  <md-card-title>Serverless</md-card-title> 
+  <md-tab-group>
+    <md-tab label="Users" routerLinkActive='active' routerLink="/admin/users">Users</md-tab>
+    <md-tab label="Packages" routerLinkActive='active' routerLink="/admin/packages">Packages</md-tab>
+    <md-tab label="Calls" routerLinkActive='active' routerLink="/users/calls">Calls</md-tab>
+  </md-tab-group>
+</md-card>
+-->
+
+<div>
+  <md-toolbar color="primary">
+    <span>Serve This!</span>
+    
+    <div class="pull-right">
+      <button md-icon-button [md-menu-trigger-for]="menu" *ngIf="authService.isLoggedIn()">
+        <md-icon>more_vert</md-icon>
+      </button>
+    </div>
+    
+    <div class="clearfix"></div>
+  </md-toolbar>
+  <md-menu x-position="before" #menu="mdMenu">
+    <button md-menu-item [routerLink]="['/calls']" routeLinkAcitve="active" >Calls</button>
+    <button md-menu-item *ngIf="authService.isAdmin()" [routerLink]="['/admin/packages']">Packages</button>
+    <button md-menu-item *ngIf="authService.isAdmin()" [routerLink]="['/admin/users']">Users</button>
+    <button md-menu-item (click)="authService.logout()">Logout</button>
+  </md-menu>
+
+  <md-card>
+    <router-outlet></router-outlet>
+  </md-card>
+
+</div>
+
