@@ -1,4 +1,6 @@
-# Frontend
+# Serverless Frontend
+
+This application is intended to be a frontend for a serverless platform. It can interact with any node of the platform and allow a single user to see their own calls and allow a platform admin manage users, packages, and calls.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
 
