@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
-import { CdkTableModule } from '@angular/cdk';
+import { CdkTableModule  } from '@angular/cdk/table';
 import { CodemirrorModule } from 'ng2-codemirror';
 
 
@@ -93,8 +93,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    CdkTableModule,
     MaterialModule,
+    CdkTableModule,
     HttpModule,
     FormsModule,
     CodemirrorModule,
